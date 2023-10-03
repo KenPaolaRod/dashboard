@@ -31,9 +31,14 @@ header {
 }
 
 .logo {
-  background-color: var(--bg-color-dark);
-  border-radius: 50%;
   margin: 0.8rem;
+}
+
+.logo img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+
 }
 
 .usuario {
@@ -58,16 +63,14 @@ header {
   letter-spacing: 0.1rem;
 }
 
-.foto {
+.foto img {
   width: 55px;
   height: 55px;
-  background-color: var(--bg-color-dark);
   border-radius: 50%;
 }
 
 .main-section {
   display: grid;
-  position: relative;
 }
 
 .side {
@@ -84,24 +87,28 @@ header {
 h1 {
   text-align: center;
   margin-top: 1.5rem;
-  font-size: 1.8rem;
+  /* font-size: 1.8rem; */
+  font-size: 1rem;
 }
 
-.data-box {
+.data-boxes {
   background-color: var(--bg-color-light);
-  width: 23rem;
+  /* width: 23rem; */
+  width: 15rem;
   height: 25rem;
   margin: 1.5rem auto;
   border-radius: 10px;
   padding: 1.5rem;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   display: grid;
   row-gap: 1rem;
 }
 
 .data {
   background-color: var(--bg-color-darker);
-  width: 20rem;
+  /* width: 20rem; */
+  width: 12rem;
   height: 3.3rem;
   color: var(--color-light);
   display: grid;
@@ -127,11 +134,99 @@ h1 {
 
 .chart {
   background-color: var(--bg-color-dark);
-  width: 23rem;
+  /* width: 23rem; */
+  width: 15rem;
   height: 25rem;
   margin: 0 auto;
   border-radius: 10px;
 }
 
+@media screen and (min-width: 360px) {
+
+h1 {
+  font-size: 1.8rem;
+ }
+
+ 
+.data-boxes {
+  width: 20rem;
+}
+
+.data {
+  width: 17rem;
+}
+
+.chart {
+  width: 20rem;
+}
+
+}
+
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 2rem;
+   }
+  
+   
+  .data-boxes {
+    width: 30rem;
+  }
+  
+  .data {
+    width: 26rem;
+  }
+  
+  .chart {
+    width: 30rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .main-section {
+    grid-template-columns: 7.1rem 1fr;
+  }
+
+  .side {
+    background-color: var(--bg-color-medium);
+    border-right: 1px solid var(--color-medium);
+    grid-column: 1 / 2;
+    color: var(--bg-color-darker);
+    display: grid;
+    grid-template-columns: none;
+    grid-template-rows: -webkit-min-content -webkit-min-content 1fr;
+    grid-template-rows: min-content min-content 1fr;
+    row-gap: 3rem;
+    height: 90vh;
+  }
+
+  .settings-icon {
+    align-self: flex-end;
+  }
+
+  .main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 3rem;
+    align-items: center;
+    align-content: center;
+  }
+
+  h1 {
+    grid-column: 1 / -1;
+    margin-top: 3rem;
+  }
+
+  .data-boxes {
+    width: 23rem;
+  }
+  
+  .data {
+    width: 20rem;
+  }
+  
+  .chart {
+    width: 23rem;
+  }
 
 
+}
