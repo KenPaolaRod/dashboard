@@ -1,7 +1,7 @@
 const dataBox = document.querySelector(".data-box");
 const actualDate = document.getElementById("actual-date");
 
-import { fetchData } from "./app.js";
+import { fetchData, getChartData, chartsData } from "./fetchs.js";
 
 // agregando la informacion de las empresas en el UI
 function boxElemts() {
@@ -28,17 +28,17 @@ function boxElemts() {
       dataPrice.textContent = e.price
 
       const dayChange = document.createElement("p");
-      dayChange.classList.add("day-change-negatv")
+      dayChange.classList.add("day-change")
       dayChange.textContent = e.day_change
 
       dataBoxes.appendChild(data);
       data.append(dataTicker, dataName, dataPrice, dayChange);
-
-      if (dayChange <= 0) {
+      
+      if (e.day_change <= 0) {
         dayChange.classList.add("day-change-negatv");
       } else {
-        dayChange.classList.add("day-change-positve");
-      }  
+        dayChange.classList.add("day-change-positve");      
+      } 
 
     });
   
@@ -47,6 +47,50 @@ function boxElemts() {
 
 };
 
+// Mostrando datos en el chart
+function graficar() {
+
+  getChartData().then(chartData => {
+    const  closePrice = [];
+    const dataDate = [];
+    console.log(chartData);
+
+    
+
+    chartData.forEach(element => {
+      closePrice.push(element.close);
+      dataDate.push(element.date.slice(0, 10));
+
+      console.log(element.date.slice(0, 10));
+    });
+
+    new Chart(chartsData, {
+      type: 'line',
+      data: {
+        labels: dataDate.splice(0,5),
+        datasets: [{
+          type: "line",
+          label: 'Close Price',
+          data: closePrice,
+          borderWidth: 1,
+          borderColor: '#0D1F4B',
+          backgroundColor: "#03CF83"
+        }],
+      },
+      options: {
+        scales: {
+          x: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+    
+  });
+  
+}
+
+graficar()
 boxElemts();
 
 // aqui estoy mostrando en el UI el dia actual 
@@ -58,8 +102,6 @@ function currentDate() {
   const year = date.getFullYear()
 
   actualDate.textContent = `${weekDay} ${day} ${month} ${year}`
-  
-
 }
 
 currentDate()
