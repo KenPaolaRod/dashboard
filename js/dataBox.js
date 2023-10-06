@@ -1,6 +1,9 @@
-const dataBox = document.querySelector(".data-box")
+const dataBox = document.querySelector(".data-box");
+const actualDate = document.getElementById("actual-date");
+
 import { fetchData } from "./app.js";
 
+// agregando la informacion de las empresas en el UI
 function boxElemts() {
   const dataBoxes = document.createElement("div");
   dataBoxes.classList.add("data-boxes");
@@ -28,8 +31,6 @@ function boxElemts() {
       dayChange.classList.add("day-change-negatv")
       dayChange.textContent = e.day_change
 
-
-
       dataBoxes.appendChild(data);
       data.append(dataTicker, dataName, dataPrice, dayChange);
 
@@ -42,8 +43,23 @@ function boxElemts() {
     });
   
   
-  })
+  });
+
+};
+
+boxElemts();
+
+// aqui estoy mostrando en el UI el dia actual 
+function currentDate() {
+  const date = new Date();
+  const weekDay = date.toLocaleDateString('en-US', { weekday: 'long' });
+  const month = date.toLocaleDateString('en-US', { month: 'short' });
+  const day = date.getDate();
+  const year = date.getFullYear()
+
+  actualDate.textContent = `${weekDay} ${day} ${month} ${year}`
+  
 
 }
 
-boxElemts()
+currentDate()
