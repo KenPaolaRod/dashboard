@@ -5,6 +5,8 @@ import { fetchData, getChartData, chartsData } from "./fetchs.js";
 
 // agregando la informacion de las empresas en el UI
 function boxElemts() {
+  const urlInput = document.querySelector(".data");
+
   const dataBoxes = document.createElement("div");
   dataBoxes.classList.add("data-boxes");
   dataBox.appendChild(dataBoxes);
@@ -40,31 +42,30 @@ function boxElemts() {
         dayChange.classList.add("day-change-positve");      
       } 
 
+      companiesChart(data)
     });
-  
-  
   });
-
 };
 
 // Mostrando datos en el chart
-function graficar() {
 
-  getChartData().then(chartData => {
+let myChart = null;
+
+function graficar(symbol) {
+  getChartData(symbol).then(chartData => {
     const  closePrice = [];
     const dataDate = [];
-    console.log(chartData);
-
-    
 
     chartData.forEach(element => {
       closePrice.push(element.close);
       dataDate.push(element.date.slice(0, 10));
-
-      console.log(element.date.slice(0, 10));
     });
 
-    new Chart(chartsData, {
+    if (myChart !== null) {
+      myChart.destroy();
+    }
+
+    myChart = new Chart(chartsData, {
       type: 'line',
       data: {
         labels: dataDate.splice(0,5),
@@ -85,13 +86,15 @@ function graficar() {
         }
       }
     });
-    
   });
-  
-}
+};
 
-graficar()
-boxElemts();
+
+function loadDefaults() {
+  graficar("AAPL");
+  boxElemts();
+  currentDate();
+}
 
 // aqui estoy mostrando en el UI el dia actual 
 function currentDate() {
@@ -104,4 +107,11 @@ function currentDate() {
   actualDate.textContent = `${weekDay} ${day} ${month} ${year}`
 }
 
-currentDate()
+function companiesChart(company) {
+  company.addEventListener("click", function()  {
+    let symbol = company.firstElementChild.textContent;
+    graficar(symbol);
+  })
+}
+
+loadDefaults();
