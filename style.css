@@ -98,6 +98,7 @@ h1 {
   grid-column: 1 / -1;
   text-align: center;
   letter-spacing: 0.3rem;
+  padding-top: 1rem;
 }
 
 .data-boxes {
