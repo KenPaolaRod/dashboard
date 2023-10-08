@@ -28,19 +28,25 @@ function boxElemts() {
 
       const dataPrice = document.createElement("p");
       dataPrice.classList.add("price");
-      dataPrice.textContent = e.price
+      dataPrice.textContent = `$${e.price}`;
 
       const dayChange = document.createElement("p");
       dayChange.classList.add("day-change")
-      dayChange.textContent = e.day_change
+      dayChange.textContent = `$${e.day_change}`;
 
       dataBoxes.appendChild(data);
       data.append(dataTicker, dataName, dataPrice, dayChange);
+
+      const arrow = document.createElement("i");
+      arrow.classList.add("fa-solid");
+      dayChange.append(arrow);
       
       if (e.day_change <= 0) {
         dayChange.classList.add("day-change-negatv");
+        arrow.classList.add("fa-arrow-down");
       } else {
-        dayChange.classList.add("day-change-positve");      
+        dayChange.classList.add("day-change-positve");
+        arrow.classList.add("fa-arrow-up");    
       } 
 
       companiesChart(data)
