@@ -1,5 +1,6 @@
 const dataBox = document.querySelector(".data-box");
 const actualDate = document.getElementById("actual-date");
+const chartInfo = document.querySelector(".chart-info");
 
 import { fetchData, getChartData, chartsData } from "./fetchs.js";
 
@@ -51,8 +52,13 @@ function boxElemts() {
 
 let myChart = null;
 
-function graficar(symbol) {
+// Creando un elemento que muestre el nombre de la empresa por cada chart
+let chartCompanyName = document.createElement("h3");
+chartInfo.append(chartCompanyName);
+
+function graficar(symbol) {  
   getChartData(symbol).then(chartData => {
+
     const  closePrice = [];
     const dataDate = [];
 
@@ -65,6 +71,10 @@ function graficar(symbol) {
       myChart.destroy();
     }
 
+    // Mostrando el nombre de la empresa por cada chart 
+    chartCompanyName.textContent = symbol;
+
+    // Chart
     myChart = new Chart(chartsData, {
       type: 'line',
       data: {
@@ -86,6 +96,7 @@ function graficar(symbol) {
         }
       }
     });
+
   });
 };
 
@@ -113,5 +124,6 @@ function companiesChart(company) {
     graficar(symbol);
   })
 }
+
 
 loadDefaults();
