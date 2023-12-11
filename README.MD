@@ -1,6 +1,8 @@
 
 # Dashboard
 
+DEMO ----- https://kenpaolarod.github.io/dashboard/
+
 En este proyecto estamos analizando nuestras 3 empresas favoritas que estan en los Mercados Financieros.
 
 Fue un gran reto entender que tipos de datos debiamos mostrar porque aunque conocemos estas compañias no sabiamos nada sobre los mercados financieros pero con un poco de research pudimos lograr los resultados que podra ver en el UI
